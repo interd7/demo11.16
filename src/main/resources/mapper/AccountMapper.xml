@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gengdan.demo.mapper.AccountMapper">
+
+    <update id="moveIn">
+        update account
+        set balance=balance+#{myMoney}
+        where id=#{myId,jdbcType=INTEGER}
+    </update>
+
+
+    <update id="moveOut">
+        update account
+        set balance=balance-#{myMoney}
+        where id=#{myId,jdbcType=INTEGER} and balance>#{myMoney}
+    </update>
+
+
+    <select id="fineOneAccount" resultType="com.gengdan.demo.entity.Account" parameterType="int">
+        select * from account
+        where id=#{myId,jdbcType=INTEGER}
+    </select>
+
+</mapper>

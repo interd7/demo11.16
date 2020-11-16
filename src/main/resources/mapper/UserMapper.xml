@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gengdan.demo.mapper.UserMapper">
+    <insert id="insertOneUser" parameterType="com.gengdan.demo.entity.MyUser">
+        insert into user(user_name, password)
+        values (#{myName},#{myPassword})
+    </insert>
+
+
+    <insert id="insertOneMapUser" parameterType="java.util.HashMap">
+        insert into user(user_name, password, real_name)
+        values (#{key1},#{key2},#{key3})
+    </insert>
+
+    <!--根据id查找用户-->
+    <select id="selectUserById" resultType="com.gengdan.demo.entity.User">
+        select * from user where id=#{id}
+    </select>
+
+
+    <!--根据用户名和密码查询用户信息-->
+    <select id="selectUserByUserNameAndPassWord" resultType="com.gengdan.demo.entity.User">
+        select * from user
+        where password=#{password}
+        and user_name=#{userName}
+    </select>
+
+
+
+    <select id="selectHisUserById" resultMap="UserResultMap">
+        select * from user where id=#{id}
+    </select>
+
+
+    <select id="selectByUserDynamic" resultType="com.gengdan.demo.entity.User" parameterType="com.gengdan.demo.entity.User">
+        select * from user
+        where 1=1
+        <if test="userName!=null and userName!=''">
+            and user_name=#{userName}
+        </if>
+        <if test="password!=null and password!=''">
+            and password=#{password}
+        </if>
+        <if test="realName!=null and realName!=''">
+            and real_name=#{realName}
+        </if>
+    </select>
+
+    <select id="selectByUserChooseDynamic" resultType="com.gengdan.demo.entity.User">
+        select * from user
+        where 1=1
+        <choose>
+            <when test="userName!=null and userName!=''">
+                and user_name=#{userName}
+            </when>
+            <when test="password!=null and password!=''">
+                and password=#{password}
+            </when>
+            <when test="realName!=null and realName!=''">
+                and real_name=#{realName}
+            </when>
+            <otherwise>
+                and 1=2
+            </otherwise>
+        </choose>
+
+    </select>
+
+
+    <select id="selectByUserForeachListDynamic" resultType="com.gengdan.demo.entity.User">
+        select * from user
+        where id in
+        <foreach collection="list" open="(" close=")" separator="," item="id" index="i">
+            #{id}
+        </foreach>
+    </select>
+
+
+    <select id="selectByUserForeachArrayDynamic" resultType="com.gengdan.demo.entity.User">
+        select * from user
+        where id in
+        <foreach collection="array" open="(" close=")" separator="," item="id" index="i">
+            #{id}
+        </foreach>
+    </select>
+
+
+    <select id="selectByUserForeachSetDynamic" resultType="com.gengdan.demo.entity.User">
+        select * from user
+        where id in
+        <foreach collection="collection" open="(" close=")" separator="," item="id" index="i">
+            #{id}
+        </foreach>
+    </select>
+
+    <select id="selectByUserByUserName" resultType="com.gengdan.demo.entity.User" parameterType="String">
+        select * from user where user_name=#{userName}
+    </select>
+    <select id="findAllUser" resultType="com.gengdan.demo.entity.User">
+        select * from user
+    </select>
+
+
+    <resultMap id="UserResultMap" type="com.gengdan.demo.entity.HisUser">
+        <id column="id" jdbcType="INTEGER" property="hisId" />
+        <result column="user_name" jdbcType="VARCHAR" property="hisUserName" />
+        <result column="password" jdbcType="VARCHAR" property="hisPassword" />
+        <result column="real_name" jdbcType="VARCHAR" property="hisRealName" />
+    </resultMap>
+</mapper>
