@@ -19,4 +19,6 @@ public interface UserService {
     int insertOneUser(String userName,String password);
 
     List<User> findAllUser();
+
+    List<User> findAllUserForRedis(int pageSize,int pageNumber);
 }

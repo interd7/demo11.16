@@ -44,4 +44,14 @@ public class PageController {
         System.out.println("showPage");
         return "showUserPageInfoJSON";
     }
+
+    @RequestMapping( value = "pageRedis",method = RequestMethod.GET)
+    public String pageRedis(@RequestParam(defaultValue = "4", value = "pageSize") int pageSize,
+                                 @RequestParam(defaultValue = "1", value = "pageNumber") int pageNumber,
+                                 Model model){
+        List<User> userList = userService.findAllUserForRedis(pageSize,pageNumber);
+        PageInfo<User> pageInfo = new PageInfo(userList);
+        model.addAttribute("pageInfo",pageInfo);
+        return "showUserPageInfo";
+    }
 }

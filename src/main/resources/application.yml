@@ -1,6 +1,11 @@
 server:
   port: 8081
 spring:
+  redis:
+    host: 127.0.0.1
+    post: 6379
+    database: 0
+    timeout: 1080
   mvc:
     view:
       prefix: /WEB-INF/views/

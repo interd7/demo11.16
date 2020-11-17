@@ -4,7 +4,9 @@ import com.gengdan.demo.entity.MyUser;
 import com.gengdan.demo.entity.User;
 import com.gengdan.demo.mapper.UserMapper;
 import com.gengdan.demo.service.UserService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -48,6 +50,13 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public List<User> findAllUser(){
+        return userMapper.findAllUser();
+    }
+
+    @Override
+    @Cacheable(value = "aboutUser",key="'user_'+#pageSize+#pageNumber")
+    public List<User> findAllUserForRedis(int pageSize, int pageNumber) {
+        PageHelper.startPage(pageNumber,pageSize);
         return userMapper.findAllUser();
     }
 }
