@@ -25,10 +25,12 @@ public class StudentInfoController {
     @RequestMapping(value = "myStudentInfo",method = RequestMethod.POST)
     public @ResponseBody
     PageInfo<Stu> myStudentInfo(@RequestBody JSONPage pageInfo){
-        PageHelper.startPage(pageInfo.getPageNumber(),
+        long startTime=System.currentTimeMillis();
+        List<Stu> all = studentService.findAllStudentForRedis(pageInfo.getPageNumber(),
                 pageInfo.getPageSize());
-        List<Stu> all = studentService.findAllStudent();
         PageInfo<Stu> studentinfo = new PageInfo(all);
+        long endTime=System.currentTimeMillis();
+        System.out.println("程序运行时间： "+(endTime-startTime)+"ms");
         return studentinfo;
     }
 

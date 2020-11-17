@@ -2,12 +2,10 @@ package com.gengdan.demo.entity;
 
 import lombok.Data;
 
-/**
- * Created by inter.d on 2020/11/10 2:17 下午
- * @author inter.d
- */
+import java.io.Serializable;
+
 @Data
-public class Stu {
+public class Stu implements Serializable {
     private Integer id;
     private String name;
     private String sex;
