@@ -29,15 +29,15 @@ public class PageController {
         model.addAttribute("pageInfo",pageInfo);
         return "showUserPageInfo";
     }
-    @RequestMapping(value = "myCurrentPage0",method = RequestMethod.POST)
-    public @ResponseBody
-    PageInfo<User> myCurrentPage0(@RequestBody JSONPage pageInfo){
-        PageHelper.startPage(pageInfo.getPageNumber(),
-                pageInfo.getPageSize());
-        List<User> all = userService.findAllUser();
-        PageInfo<User> info = new PageInfo(all);
-        return info;
-    }
+//    @RequestMapping(value = "myCurrentPage0",method = RequestMethod.POST)
+//    public @ResponseBody
+//    PageInfo<User> myCurrentPage0(@RequestBody JSONPage pageInfo){
+//        PageHelper.startPage(pageInfo.getPageNumber(),
+//                pageInfo.getPageSize());
+//        List<User> all = userService.findAllUser();
+//        PageInfo<User> info = new PageInfo(all);
+//        return info;
+//    }
 
     @GetMapping("ShowUserPageInfoJSON")
     String showPage(){
