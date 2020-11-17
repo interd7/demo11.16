@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- *
  * @author inter.d
  * @version 1.0
  * @date 2020/9/22 09:31
@@ -22,29 +21,29 @@ public class ComputerController {
     ComputerService computerService;
 
     @GetMapping("index")
-    String index(){
+    String index() {
         return "calculator";
     }
 
     @GetMapping("submitAction")
     String submitAction(@RequestParam("first") String first,
                         @RequestParam("second") String second,
-                        @RequestParam("operator") String operator, Model model){
-        float result=0;
-        float intFirst=Float.parseFloat(first);
-        float intSecond=Float.parseFloat(second);
-        if(operator.equals("+")){
-            result=computerService.add(intFirst,intSecond);
-        }else if(operator.equals("-")){
-            result=computerService.minus(intFirst,intSecond);
-        }else if(operator.equals("*")){
-            result=computerService.multiplication(intFirst,intSecond);
-        }else if(operator.equals("/")){
-            result=computerService.division(intFirst,intSecond);
-        }else{
+                        @RequestParam("operator") String operator, Model model) {
+        float result = 0;
+        float intFirst = Float.parseFloat(first);
+        float intSecond = Float.parseFloat(second);
+        if (operator.equals("+")) {
+            result = computerService.add(intFirst, intSecond);
+        } else if (operator.equals("-")) {
+            result = computerService.minus(intFirst, intSecond);
+        } else if (operator.equals("*")) {
+            result = computerService.multiplication(intFirst, intSecond);
+        } else if (operator.equals("/")) {
+            result = computerService.division(intFirst, intSecond);
+        } else {
 
         }
-        model.addAttribute("result",result);
+        model.addAttribute("result", result);
         return "result";
     }
 }

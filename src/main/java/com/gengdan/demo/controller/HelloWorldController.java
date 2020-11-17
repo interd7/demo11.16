@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- *
  * @author inter.d
  * @version 1.0
  * @date 2020/9/8 10:01
@@ -16,8 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class HelloWorldController {
 
     @RequestMapping(value = "/helloWorld", method = {RequestMethod.GET, RequestMethod.POST})
-    public String helloWorld(Model model){
-        model.addAttribute("message","Hello Spring");
+    public String helloWorld(Model model) {
+        model.addAttribute("message", "Hello Spring");
         return "index";
     }
 }

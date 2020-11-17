@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- *
  * @author inter.d
  * @version 1.0
  * @date 2020/9/15 09:00
@@ -34,12 +33,12 @@ public class RegisterController {
 
     @GetMapping("registerAction")
     public String loginAction(@RequestParam("username") String userName,
-                       @RequestParam("password") String userPassword, Model model){
-        int isExist=userService.isSelectUserNameExist(userName);
-        if(isExist==1){
+                              @RequestParam("password") String userPassword, Model model) {
+        int isExist = userService.isSelectUserNameExist(userName);
+        if (isExist == 1) {
             return "registerError";
         }
-        userService.insertOneUser(userName,userPassword);
+        userService.insertOneUser(userName, userPassword);
         return "registerSuccess";
     }
 

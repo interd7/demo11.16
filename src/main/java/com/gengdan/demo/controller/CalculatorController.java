@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 /**
- *
  * @author inter.d
  * @version 1.0
  * @date 2020/9/22 09:31
@@ -18,29 +17,29 @@ public class CalculatorController {
 
     @ApiOperation(value = "首页", notes = "首页")
     @GetMapping("index")
-    String index(){
+    String index() {
         return "calculator";
     }
 
     @GetMapping("submitAction")
     String submitAction(@RequestParam("first") String first,
                         @RequestParam("second") String second,
-                        @RequestParam("operator") String operator, Model model){
-        int result=0;
-        int intFirst=Integer.parseInt(first);
-        int intSecond=Integer.parseInt(second);
-        if(operator.equals("+")){
-            result=intFirst+intSecond;
-        }else if(operator.equals("-")){
-            result=intFirst-intSecond;
-        }else if(operator.equals("*")){
-            result=intFirst*intSecond;
-        }else if(operator.equals("/")){
-            result=intFirst/intSecond;
-        }else{
+                        @RequestParam("operator") String operator, Model model) {
+        int result = 0;
+        int intFirst = Integer.parseInt(first);
+        int intSecond = Integer.parseInt(second);
+        if (operator.equals("+")) {
+            result = intFirst + intSecond;
+        } else if (operator.equals("-")) {
+            result = intFirst - intSecond;
+        } else if (operator.equals("*")) {
+            result = intFirst * intSecond;
+        } else if (operator.equals("/")) {
+            result = intFirst / intSecond;
+        } else {
 
         }
-        model.addAttribute("result",result);
+        model.addAttribute("result", result);
         return "result";
     }
 }

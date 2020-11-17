@@ -17,26 +17,27 @@ import java.util.List;
 @RequestMapping("student")
 public class StudentInfoController {
     final StudentService studentService;
-    public StudentInfoController(StudentService studentService){
+
+    public StudentInfoController(StudentService studentService) {
         this.studentService = studentService;
     }
 
 
-    @RequestMapping(value = "myStudentInfo",method = RequestMethod.POST)
+    @RequestMapping(value = "myStudentInfo", method = RequestMethod.POST)
     public @ResponseBody
-    PageInfo<Stu> myStudentInfo(@RequestBody JSONPage pageInfo){
-        long startTime=System.currentTimeMillis();
+    PageInfo<Stu> myStudentInfo(@RequestBody JSONPage pageInfo) {
+        long startTime = System.currentTimeMillis();
         List<Stu> all = studentService.findAllStudentForRedis(pageInfo.getPageNumber(),
                 pageInfo.getPageSize());
         PageInfo<Stu> studentinfo = new PageInfo(all);
-        long endTime=System.currentTimeMillis();
-        System.out.println("程序运行时间： "+(endTime-startTime)+"ms");
+        long endTime = System.currentTimeMillis();
+        System.out.println("程序运行时间： " + (endTime - startTime) + "ms");
         return studentinfo;
     }
 
 
     @GetMapping("ShowStudentInfo")
-    String showPage(){
+    String showPage() {
         System.out.println("showStudentInfo");
 
         return "showStudentInfoJSON";
