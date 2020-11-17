@@ -17,7 +17,8 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import java.time.Duration;
 
 /**
- * @author ShiJiaWei
+ *
+ * @author inter.d
  * @version 1.0
  * @date 2020/11/17 09:49
  */

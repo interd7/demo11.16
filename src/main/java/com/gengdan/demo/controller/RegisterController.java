@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * @author ShiJiaWei
+ *
+ * @author inter.d
  * @version 1.0
  * @date 2020/9/15 09:00
  */
