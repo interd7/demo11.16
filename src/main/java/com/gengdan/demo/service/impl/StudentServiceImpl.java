@@ -6,13 +6,7 @@ import com.gengdan.demo.service.StudentService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-/**
- * description:
- *@param:
- *@return:
- *@author YimaiDuan
- *@date 2020/11/10
- */
+
 @Service
 public class StudentServiceImpl implements StudentService {
     private final StudentMapper studentMapper;

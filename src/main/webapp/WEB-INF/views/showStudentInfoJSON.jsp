@@ -1,11 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: DuanYimai
-  Date: 2020/11/11
-  Time: 10:28
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -35,22 +28,6 @@
 <body>
 <div align="center">
     <table class="table table-bordered" id='tabletest'>
-        <tr>
-            <th>id</th>
-            <th>name</th>
-            <th>sex</th>
-            <th>age</th>
-            <th>home</th>
-            <th>major</th>
-        </tr>
-<%--        <c:forEach items="${pageInfo.list}" var="user">--%>
-<%--            <tr>--%>
-<%--                <td>${user.id}</td>--%>
-<%--                <td>${user.userName}</td>--%>
-<%--                <td>${user.passWord}</td>--%>
-<%--                <td>${user.realName}</td>--%>
-<%--            </tr>--%>
-<%--        </c:forEach>--%>
     </table>
 <%--<textarea id="textareaForStudent"></textarea>--%>
 <p>当前<span id="currentPage"></span>页，总<span id="totalPages"></span>页，共<span id="totalRecorders"></span>条记录</p >
@@ -58,9 +35,9 @@
 <a href="#" onclick="myShowPreviousPage()">上一页</a >
 <a href="#" onclick="myShowNextPage()">下一页</a >
 <a href="#" onclick="myShowLastPage()">尾页</a >
-    <form id="input1">
-        本页显示几条数据：<input type="text" name="dataNum">
-        <input type="submit" value="提交">
+    <form id="input1" onsubmit="return false" action="##" method="post">
+        本页显示几条数据：<input type="text" name="dataNum" />
+        <input type="submit" value="提交" onclick="changePage()" />
     </form>
 </div>
 
@@ -76,6 +53,23 @@
             'pageNumber':currentPage
         };
         myShowCurrentPage(pageInfo);
+    }
+
+    function changePage() {
+        $.ajax({
+            type:"GET",
+            contentType:"application/json",
+            dataType:"json",
+            url:"/student/changePage",
+            data: $('#input1').serialize(),
+            success: function (result) {
+                pageSize=result;
+                myShowFirstPage()
+            },
+            error : function() {
+                alert("异常！");
+            }
+        });
     }
     function myShowNextPage(){
         currentPage=currentPage+1;
@@ -119,6 +113,14 @@
                 //遍历数据
                 // $.each(result,function(index,element){
                     let contentSet = result.list;
+                    str+="<tr>\n" +
+                        "            <td>id</td>\n" +
+                        "            <td>name</td>\n" +
+                        "            <td>sex</td>\n" +
+                        "            <td>age</td>\n" +
+                        "            <td>home</td>\n" +
+                        "            <td>major</td>\n" +
+                        "        </tr>"
                     for(let i=0;i<contentSet.length;i++) {
                         let oneStudent = contentSet[i];
                         str += "<tr><td>" + oneStudent.id + "</td><td>" + oneStudent.name + "</td><td>" + oneStudent.sex + "</td><td>" + oneStudent.age + "</td><td>" + oneStudent.home + "</td><td>" + oneStudent.major + "</td></tr>";
@@ -127,7 +129,8 @@
                 //遍历完成之后
                 str +="</tbody></table>";
                 //将表格添加到body中
-                $('#tabletest').append(str);
+                $('#tabletest').html(str);
+
                 var contentStr="";
                 let contentObjectSet=result.list;
                 for(let i=0;i<contentObjectSet.length;i++){
@@ -168,8 +171,6 @@
         $("#textareaForUser").attr('rows',pageInfo.pageSize);
         $("#textareaForUser").attr('cols','80');
         console.log(x.elements[0].value)
-        // $("#tabletest").attr('rows',pageInfo.pageSize)
-        // $("#tabletest").attr('cols','80')
         myShowCurrentPage(pageInfo);
     })
 </script>
