@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author inter.d
+ */
 @Service
 public class StudentServiceImpl implements StudentService {
     private final StudentMapper studentMapper;
@@ -21,9 +24,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    @Cacheable(value = "theHomework",key="'stu_'+#pageSize+#pageNumber")
-    public List<Stu> findAllStudentForRedis(int pageNumber, int pageSize) {
-        PageHelper.startPage(pageNumber,pageSize);
+    @Cacheable(value = "stu",key="'stu_'+#pageSize+#pageNumber")
+    public List<Stu> findAllStudentForRedis(int pageSize, int pageNumber) {
+        PageHelper.startPage(pageSize,pageNumber);
         return studentMapper.findAllStudent();
     }
 

@@ -27,8 +27,8 @@ public class StudentInfoController {
     public @ResponseBody
     PageInfo<Stu> myStudentInfo(@RequestBody JSONPage pageInfo) {
         long startTime = System.currentTimeMillis();
-        List<Stu> all = studentService.findAllStudentForRedis(pageInfo.getPageNumber(),
-                pageInfo.getPageSize());
+        List<Stu> all = studentService.findAllStudentForRedis(pageInfo.getPageSize(),
+                pageInfo.getPageNumber());
         PageInfo<Stu> studentinfo = new PageInfo(all);
         long endTime = System.currentTimeMillis();
         System.out.println("程序运行时间： " + (endTime - startTime) + "ms");

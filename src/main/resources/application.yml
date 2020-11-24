@@ -20,4 +20,10 @@ spring:
     username: root
     password: root1234
     driver-class-name: com.mysql.cj.jdbc.Driver
-
+#####################################################
+#logging:
+#  level:
+#    root: INFO
+#    com.gengdan.demo.mapper: TRACE
+#  file:
+#    name: /Users/inter.d/logs/test.log

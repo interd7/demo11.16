@@ -3,6 +3,7 @@ package com.gengdan.demo.controller;
 import com.gengdan.demo.entity.JSONPage;
 import com.gengdan.demo.entity.User;
 import com.gengdan.demo.service.UserService;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.ui.Model;
@@ -54,4 +55,5 @@ public class PageController {
         model.addAttribute("pageInfo",pageInfo);
         return "showUserPageInfo";
     }
+
 }

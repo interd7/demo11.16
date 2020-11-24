@@ -2,6 +2,9 @@ package com.gengdan.demo.entity;
 
 import lombok.Data;
 
+/**
+ * @author inter.d
+ */
 @Data
 public class JSONPage {
     private Integer pageSize;
