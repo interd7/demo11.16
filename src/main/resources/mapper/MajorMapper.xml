@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gengdan.demo.mapper.MajorMapper">
+    <resultMap id="majorMap" type="com.gengdan.demo.entity.Major">
+        <id property="majorId" column="majorId" javaType="java.lang.String"/>
+        <result property="majorTitle" column="majorTitle" javaType="java.lang.String"/>
+        <collection property="newStudentList" ofType="com.gengdan.demo.entity.NewStudent">
+            <id property="sId" column="sNo" javaType="java.lang.String"/><!-- id列 -->
+            <result property="sName" column="sName" javaType="java.lang.String"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectOneMajor" parameterType="String" resultMap="majorMap">
+        select * from major m,newstudent s where m.majorId=#{majorId} and s.majorId=#{majorId}
+    </select>
+</mapper>

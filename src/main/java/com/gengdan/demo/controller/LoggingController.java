@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.awt.*;
 import java.util.List;
-
 /**
- * @author inter.d on 2020/11/24 9:32 上午
+ * description:
+ *@param: [pageInfo]
+ *@return: java.util.List<com.gengdan.demo.entity.Stu>
+ *@author YimaiDuan
+ *@date 2020/11/24
  */
 @Controller
 @RequestMapping("student")
@@ -39,5 +42,6 @@ public class LoggingController {
         log.warn("level is warn");
         log.error("level is error");
         return studentService.findAllStudentForRedis(pageInfo.getPageNumber(),pageInfo.getPageSize());
+
     }
 }
